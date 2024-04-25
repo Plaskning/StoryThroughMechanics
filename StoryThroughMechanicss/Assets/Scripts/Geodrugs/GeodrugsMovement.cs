@@ -104,5 +104,9 @@ public class GeodrugsMovement : MonoBehaviour
         {
             canMove = true;
         }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
