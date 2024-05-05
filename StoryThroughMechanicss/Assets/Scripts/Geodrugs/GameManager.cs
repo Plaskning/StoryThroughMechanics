@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private void UpdateDrugStatus()
     {
         drugsPickedUp++;
-        gravityMultiplier = drugsPickedUp + 1;
+        gravityMultiplier = (drugsPickedUp * 2) + 1;
     }
     
     public void highGravityMethod()
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator HighGravity()
     {
-        Physics2D.gravity = new Vector2(0, -6.81f - gravityMultiplier);
+        Physics2D.gravity = new Vector2(0, -2.81f - gravityMultiplier);
         yield return new WaitForSeconds(1.25f);
         Physics2D.gravity = new Vector2(0, OriginalGravity - (gravityMultiplier * 0.1f));
     }
