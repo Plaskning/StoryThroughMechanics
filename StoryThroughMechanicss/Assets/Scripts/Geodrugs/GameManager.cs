@@ -6,7 +6,9 @@ public class GameManager : MonoBehaviour
 {
 
     public float OriginalGravity = -9.81f;
-    public float gravityMultiplier;
+    public float currentGravity = 0;
+    public float gravityMultiplier = 1;
+    public int drugsPickedUp = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,18 +20,23 @@ public class GameManager : MonoBehaviour
     {
         
     }
+    private void UpdateDrugStatus()
+    {
+        drugsPickedUp++;
+        gravityMultiplier = drugsPickedUp + 1;
+    }
     
     public void highGravityMethod()
     {
+        UpdateDrugStatus();
         StopAllCoroutines();
         StartCoroutine(HighGravity());
     }
 
     public IEnumerator HighGravity()
     {
-        Physics2D.gravity = new Vector2(0, -9.81f * gravityMultiplier);
+        Physics2D.gravity = new Vector2(0, -6.81f - gravityMultiplier);
         yield return new WaitForSeconds(1.25f);
-        Physics2D.gravity = new Vector2(0, OriginalGravity);
-
+        Physics2D.gravity = new Vector2(0, OriginalGravity - (gravityMultiplier * 0.1f));
     }
 }
